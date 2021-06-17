@@ -1,15 +1,23 @@
 import React from "react"
 
 
+
 function TodoItem(props) {
+
+  const completedStyle = {
+    fontStyle: "italic",
+    color: "#cdcdcd",
+    textDecoration: "line-through"
+}
+
   return (
     <div className="todo-item">
       <input
         type="checkbox"
         checked={props.additional_attr.completed}
-        onChange={() => props.handleChange(props.additional_attr.id)}
+        onChange={() => props.handleClick(props.additional_attr.id)}
       />
-      <p>{props.additional_attr.name}</p>
+      <p style={props.additional_attr.completed ? completedStyle: null}>{props.additional_attr.name}</p>
     </div>
   )
 }
