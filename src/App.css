@@ -1,7 +1,9 @@
 body {
   background-color: whitesmoke;
 }
-
+.form{
+  margin: 1em;
+}
 .todo-list {
   background-color: white;
   margin: auto;
