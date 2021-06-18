@@ -1,15 +1,26 @@
 import './App.css'
 import React from "react"
 import TodoItem from "./components/TodoItem"
-import todosData from "./todosData"
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      todos: todosData
+      loading:false ,
+      todos: []
     }
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentDidMount(){
+    this.setState({loading:true})
+    fetch("http://localhost:8088/todosData")
+        .then(response => response.json())
+        .then(data => {this.setState({
+          loading:false,
+          todos: data
+    })
+  })
   }
 
   handleClick(id) {
@@ -30,7 +41,7 @@ class App extends React.Component {
   }
 
   render() {
-    const todoItems = this.state.todos.map(i => <TodoItem key={i.id} additional_attr={i} handleClick={this.handleClick} />)
+    const todoItems = this.state.loading ? "loading...": this.state.todos.map(i => <TodoItem key={i.id} additional_attr={i} handleClick={this.handleClick} />)
 
     return (
       <div className="todo-list" >
